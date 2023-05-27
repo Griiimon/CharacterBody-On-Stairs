@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://5n1m6f066loc"]
+[gd_scene load_steps=12 format=3 uid="uid://5n1m6f066loc"]
 
+[ext_resource type="Script" path="res://main.gd" id="1_5pck7"]
 [ext_resource type="Script" path="res://CharacterBody3D.gd" id="1_alone"]
 [ext_resource type="PackedScene" uid="uid://c24b52rmfiurx" path="res://step.tscn" id="2_skxhm"]
 
@@ -26,34 +27,45 @@ size = Vector2(50, 50)
 size = Vector3(50, 0.05, 50)
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_5pck7")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.422001, 0.906595, 0, -0.906595, 0.422001, 0, 4.48559, 0)
+
+[node name="Static Camera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-4.16959e-08, 0.300156, -0.95389, 1.31203e-08, 0.95389, 0.300156, 1, 0, -4.37114e-08, -4.6, 2.6, -3)
 
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50705, 0)
 script = ExtResource("1_alone")
 
-[node name="Camera3D" type="Camera3D" parent="Player"]
+[node name="FPS Camera" type="Camera3D" parent="Player"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.532903, 0)
+current = true
 
 [node name="Full Body" type="MeshInstance3D" parent="Player"]
 visible = false
 mesh = SubResource("CapsuleMesh_eb3p3")
 
 [node name="Capsule Body" type="MeshInstance3D" parent="Player"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 mesh = SubResource("CapsuleMesh_1be3r")
 
 [node name="CapsuleShape3D" type="CollisionShape3D" parent="Player"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 shape = SubResource("CapsuleShape3D_otgc8")
 
 [node name="SeparationShape3D" type="CollisionShape3D" parent="Player"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("SeparationRayShape3D_shk02")
 
 [node name="Feet" type="MeshInstance3D" parent="Player"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
 mesh = SubResource("BoxMesh_35fkp")
 
@@ -67,32 +79,91 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_af7ar")
 
-[node name="Step" parent="." instance=ExtResource("2_skxhm")]
+[node name="Steps" type="Node3D" parent="."]
+
+[node name="Step" parent="Steps" instance=ExtResource("2_skxhm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0999999, -3)
 
-[node name="Step2" parent="." instance=ExtResource("2_skxhm")]
+[node name="Step2" parent="Steps" instance=ExtResource("2_skxhm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0999999, -5)
 
-[node name="Step3" parent="." instance=ExtResource("2_skxhm")]
+[node name="Step3" parent="Steps" instance=ExtResource("2_skxhm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -5)
 
-[node name="Step4" parent="." instance=ExtResource("2_skxhm")]
+[node name="Step10" parent="Steps" instance=ExtResource("2_skxhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -5)
+
+[node name="Step4" parent="Steps" instance=ExtResource("2_skxhm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0999999, -7)
 
-[node name="Step5" parent="." instance=ExtResource("2_skxhm")]
+[node name="Step5" parent="Steps" instance=ExtResource("2_skxhm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -7)
 
-[node name="Step6" parent="." instance=ExtResource("2_skxhm")]
+[node name="Step6" parent="Steps" instance=ExtResource("2_skxhm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -7)
 
-[node name="Step7" parent="." instance=ExtResource("2_skxhm")]
+[node name="Step7" parent="Steps" instance=ExtResource("2_skxhm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -7)
 
-[node name="Step8" parent="." instance=ExtResource("2_skxhm")]
+[node name="Step8" parent="Steps" instance=ExtResource("2_skxhm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -7)
 
-[node name="Step9" parent="." instance=ExtResource("2_skxhm")]
+[node name="Step9" parent="Steps" instance=ExtResource("2_skxhm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, -7)
+
+[node name="Step11" parent="Steps" instance=ExtResource("2_skxhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, -7)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 20
+
+[node name="Toggle Camera Button" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+toggle_mode = true
+text = "Static Camera"
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 15
+columns = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Feet Distance"
+
+[node name="Feet HSlider" type="HSlider" parent="CanvasLayer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+focus_mode = 0
+min_value = 0.1
+max_value = 2.0
+step = 0.1
+value = 1.0
+tick_count = 10
+
+[node name="Label2" type="Label" parent="CanvasLayer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Capsule Height"
+
+[node name="Capsule HSlider" type="HSlider" parent="CanvasLayer/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+focus_mode = 0
+min_value = 0.5
+max_value = 2.0
+step = 0.1
+value = 1.6
+tick_count = 10
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6, -16.5)
@@ -107,3 +178,7 @@ Control maximum step height
 by adjusting CapsuleShape height
 or SeparationShape length"
 font_size = 128
+
+[connection signal="toggled" from="CanvasLayer/VBoxContainer/Toggle Camera Button" to="." method="_on_toggle_camera_button_toggled"]
+[connection signal="value_changed" from="CanvasLayer/VBoxContainer/GridContainer/Feet HSlider" to="." method="_on_feet_h_slider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/VBoxContainer/GridContainer/Capsule HSlider" to="." method="_on_capsule_h_slider_value_changed"]
