@@ -1,0 +1,109 @@
+[gd_scene load_steps=11 format=3 uid="uid://5n1m6f066loc"]
+
+[ext_resource type="Script" path="res://CharacterBody3D.gd" id="1_alone"]
+[ext_resource type="PackedScene" uid="uid://c24b52rmfiurx" path="res://step.tscn" id="2_skxhm"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_eb3p3"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1be3r"]
+height = 1.6
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_otgc8"]
+height = 1.6
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_shk02"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_35fkp"]
+size = Vector3(0.5, 0.2, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mtmoe"]
+albedo_color = Color(0, 0.905882, 0.917647, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i6tqc"]
+size = Vector2(50, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_af7ar"]
+size = Vector3(50, 0.05, 50)
+
+[node name="Main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.422001, 0.906595, 0, -0.906595, 0.422001, 0, 4.48559, 0)
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50705, 0)
+script = ExtResource("1_alone")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.532903, 0)
+
+[node name="Full Body" type="MeshInstance3D" parent="Player"]
+visible = false
+mesh = SubResource("CapsuleMesh_eb3p3")
+
+[node name="Capsule Body" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("CapsuleMesh_1be3r")
+
+[node name="CapsuleShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("CapsuleShape3D_otgc8")
+
+[node name="SeparationShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("SeparationRayShape3D_shk02")
+
+[node name="Feet" type="MeshInstance3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
+mesh = SubResource("BoxMesh_35fkp")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+material_override = SubResource("StandardMaterial3D_mtmoe")
+mesh = SubResource("PlaneMesh_i6tqc")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_af7ar")
+
+[node name="Step" parent="." instance=ExtResource("2_skxhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0999999, -3)
+
+[node name="Step2" parent="." instance=ExtResource("2_skxhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0999999, -5)
+
+[node name="Step3" parent="." instance=ExtResource("2_skxhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -5)
+
+[node name="Step4" parent="." instance=ExtResource("2_skxhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0999999, -7)
+
+[node name="Step5" parent="." instance=ExtResource("2_skxhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -7)
+
+[node name="Step6" parent="." instance=ExtResource("2_skxhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -7)
+
+[node name="Step7" parent="." instance=ExtResource("2_skxhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -7)
+
+[node name="Step8" parent="." instance=ExtResource("2_skxhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -7)
+
+[node name="Step9" parent="." instance=ExtResource("2_skxhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, -7)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6, -16.5)
+billboard = 2
+modulate = Color(0.807843, 0.164706, 0.188235, 1)
+text = "Separation Ray Shape points down 1m
+so it ends where the feet are
+The capsule collider is higher
+so it doesnt collide with small steps
+
+Control maximum step height 
+by adjusting CapsuleShape height
+or SeparationShape length"
+font_size = 128
