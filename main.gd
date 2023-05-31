@@ -1,19 +1,14 @@
 extends Node3D
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
+func _physics_process(delta):
+	if %"3rd Person Camera".current:
+		%"3rd Person Camera".global_position.z= $Player.global_position.z
+		%"3rd Person Camera".global_position.x= $Player.global_position.x - 5
 
 func _on_toggle_camera_button_toggled(button_pressed):
 	if button_pressed:
-		%"Static Camera".current= true
+		%"3rd Person Camera".current= true
 	else:
 		%"FPS Camera".current= true
 

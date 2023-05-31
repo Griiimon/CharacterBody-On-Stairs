@@ -32,7 +32,7 @@ script = ExtResource("1_5pck7")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.422001, 0.906595, 0, -0.906595, 0.422001, 0, 4.48559, 0)
 
-[node name="Static Camera" type="Camera3D" parent="."]
+[node name="3rd Person Camera" type="Camera3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(-4.16959e-08, 0.300156, -0.95389, 1.31203e-08, 0.95389, 0.300156, 1, 0, -4.37114e-08, -4.6, 2.6, -3)
 
@@ -126,7 +126,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
 toggle_mode = true
-text = "Static Camera"
+text = "3rd Person Camera"
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
@@ -178,6 +178,20 @@ Control maximum step height
 by adjusting CapsuleShape height
 or SeparationShape length"
 font_size = 128
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -5.7, 0, 0)
+use_collision = true
+radius = 1.3
+height = 4.037
+sides = 32
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -5.7, -1.5, 5.8)
+use_collision = true
+radius = 2.585
+height = 4.037
+sides = 32
 
 [connection signal="toggled" from="CanvasLayer/VBoxContainer/Toggle Camera Button" to="." method="_on_toggle_camera_button_toggled"]
 [connection signal="value_changed" from="CanvasLayer/VBoxContainer/GridContainer/Feet HSlider" to="." method="_on_feet_h_slider_value_changed"]
